@@ -11,7 +11,7 @@
 
   tasks: 
 
-  - name: Create a JIRA issue
+  - name: Deploying AS3 code 
     ansible.builtin.uri:
       url: https://20.0.58.197:8443/mgmt/shared/appsvcs/declare
       user: "{{ bigip_username }}"
@@ -19,9 +19,11 @@
       method: POST
       body: "{{ lookup('ansible.builtin.file','as3-declaration.json') }}"
       force_basic_auth: true
-      status_code: 201
+      status_code: 200
       body_format: json
       validate_certs: false
     register: as3_output
 
----
+  - name: DEBUG AS3 OUTPUT
+    debug:
+      msg: "detailed output: {{ as3_output }}"
